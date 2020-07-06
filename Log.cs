@@ -11,10 +11,11 @@ namespace ShandyGecko.LogSystem
         private const string ExceptionLogs = "EXCEPTION_LOGS";
         private const string AssertLogs = "ASSERT_LOGS";
 
-        private static readonly ILogger CompoundLogger;
+        public static ICompoundLogger CompoundLogger { get; private set; }
 
         static Log()
         {
+            //TODO убрать
             CompoundLogger = new CompoundLogger(new UnityLogger());
         }
 

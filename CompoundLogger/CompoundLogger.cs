@@ -4,15 +4,47 @@ using ShandyGecko.LogSystem.Filters;
 
 namespace ShandyGecko.LogSystem
 {
-	public class CompoundLogger : ILogger
+	public class CompoundLogger : ICompoundLogger
 	{
 		public IFilter Filter { get; set; }
 
-		private readonly List<ILogger> _loggers;
+		private readonly List<ILogger> _loggers = new List<ILogger>();
+
+		public IEnumerable<ILogger> Loggers => _loggers;
+
+		public void SetLoggers(params ILogger[] loggers)
+		{
+			_loggers.Clear();
+			_loggers.AddRange(loggers);
+		}
+
+		public void TryAddLogger(ILogger logger)
+		{
+			if (_loggers.Contains(logger))
+			{
+				return;
+			}
+			
+			_loggers.Add(logger);
+		}
+		
+		public void TryRemoveLogger(ILogger logger)
+		{
+			if (_loggers.Contains(logger))
+			{
+				return;
+			}
+			
+			_loggers.Remove(logger);
+		}
+
+		public CompoundLogger()
+		{
+		}
 
 		public CompoundLogger(params ILogger[] loggers)
 		{
-			_loggers = new List<ILogger>(loggers);
+			_loggers.AddRange(loggers);
 		}
 
 		public void Debug(string tag, string message)
