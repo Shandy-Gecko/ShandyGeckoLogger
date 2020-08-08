@@ -1,15 +1,15 @@
-using System;
 using System.Diagnostics;
 
 namespace ShandyGecko.LogSystem
 {
     public static class Log
     {
+        private const string TraceLogs = "TRACE_LOGS";
         private const string DebugLogs = "DEBUG_LOGS";
+        private const string InfoLogs = "INFO_LOGS";
         private const string WarningLogs = "WARNING_LOGS";
         private const string ErrorLogs = "ERROR_LOGS";
-        private const string ExceptionLogs = "EXCEPTION_LOGS";
-        private const string AssertLogs = "ASSERT_LOGS";
+        private const string CriticalLogs = "CRITICAL_LOGS";
 
         public static ICompoundLogger CompoundLogger { get; private set; }
 
@@ -19,6 +19,18 @@ namespace ShandyGecko.LogSystem
             CompoundLogger = new CompoundLogger(new UnityLogger());
         }
 
+        [Conditional(TraceLogs)]
+        public static void Trace(string tag, string message)
+        {
+            CompoundLogger.Trace(tag, message);
+        }
+        
+        [Conditional(TraceLogs)]
+        public static void Trace(object obj, string message)
+        {
+            CompoundLogger.Trace(obj, message);
+        }
+        
         [Conditional(DebugLogs)]
         public static void Debug(string tag, string message)
         {
@@ -29,6 +41,18 @@ namespace ShandyGecko.LogSystem
         public static void Debug(object obj, string message)
         {
             CompoundLogger.Debug(obj, message);
+        }
+        
+        [Conditional(InfoLogs)]
+        public static void Info(string tag, string message)
+        {
+            CompoundLogger.Info(tag, message);
+        }
+        
+        [Conditional(InfoLogs)]
+        public static void Info(object obj, string message)
+        {
+            CompoundLogger.Info(obj, message);
         }
 
         [Conditional(WarningLogs)]
@@ -54,29 +78,17 @@ namespace ShandyGecko.LogSystem
         {
             CompoundLogger.Error(obj, message);
         }
-
-        [Conditional(ExceptionLogs)]
-        public static void Exception(string tag, Exception exception)
+        
+        [Conditional(CriticalLogs)]
+        public static void Critical(string tag, string message)
         {
-            CompoundLogger.Exception(tag, exception);
+            CompoundLogger.Critical(tag, message);
         }
 
-        [Conditional(ExceptionLogs)]
-        public static void Exception(object obj, Exception exception)
+        [Conditional(ErrorLogs)]
+        public static void Critical(object obj, string message)
         {
-            CompoundLogger.Exception(obj, exception);
-        }
-
-        [Conditional(AssertLogs)]
-        public static void Assertion(string tag, object message)
-        {
-            CompoundLogger.Assertion(tag, message);
-        }
-
-        [Conditional(AssertLogs)]
-        public static void Assertion(object obj, object message)
-        {
-            CompoundLogger.Assertion(obj, message);
+            CompoundLogger.Critical(obj, message);
         }
     }
 }

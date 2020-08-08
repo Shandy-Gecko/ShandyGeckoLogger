@@ -48,12 +48,12 @@ namespace ShandyGecko.LogSystem.Filters
 			_types.Remove(type);
 		}
 
-		public bool IsPassed(MessageType messageType, string tag, string msg)
+		public bool IsPassed(MessageType messageType, string tag)
 		{
 			return _tags.Contains(tag);
 		}
 
-		public bool IsPassed(MessageType messageType, object obj, string msg)
+		public bool IsPassed(MessageType messageType, object obj)
 		{
 			return _types.Contains(obj.GetType());
 		}

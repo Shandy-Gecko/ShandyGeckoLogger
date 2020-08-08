@@ -7,12 +7,12 @@ namespace ShandyGecko.LogSystem.Filters
 	{
 		private readonly HashSet<Type> _types = new HashSet<Type>();
 		
-		public bool IsPassed(MessageType messageType, string tag, string msg)
+		public bool IsPassed(MessageType messageType, string tag)
 		{
 			return false;
 		}
 
-		public bool IsPassed(MessageType messageType, object obj, string msg)
+		public bool IsPassed(MessageType messageType, object obj)
 		{
 			return _types.Contains(obj.GetType());
 		}

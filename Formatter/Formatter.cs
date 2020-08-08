@@ -37,26 +37,6 @@ namespace ShandyGecko.LogSystem
 		{
 			return $"[{tag}]: {message}\n{GetFormatterValues()}";
 		}
-		
-		public string Format(string tag, Exception exception)
-		{
-			return $"[{tag}]: {exception.Message}, source {exception.Source}\n{GetFormatterValues()}";
-		}
-		
-		public string Format(object obj, Exception exception)
-		{
-			return $"[{obj.ToLogString()}]: {exception.Message}, source {exception.Source}\n{GetFormatterValues()}";
-		}
-		
-		public string Format(string tag, object assertion)
-		{
-			return $"[{tag}]: {assertion}\n{GetFormatterValues()}";
-		}
-		
-		public string Format(object obj, object assertion)
-		{
-			return $"[{obj.ToLogString()}]: {assertion}\n{GetFormatterValues()}";
-		}
 
 		private string GetFormatterValues()
 		{

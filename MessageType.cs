@@ -2,10 +2,11 @@ namespace ShandyGecko.LogSystem
 {
 	public enum MessageType
 	{
-		Log,
+		Trace,
+		Debug,
+		Info,
 		Warning,
 		Error,
-		Exception,
-		Assertion
+		Critical
 	}
 }

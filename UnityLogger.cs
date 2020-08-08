@@ -1,13 +1,21 @@
-using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+#if UNITY_5_3_OR_NEWER
 
 namespace ShandyGecko.LogSystem
 {
     public class UnityLogger : ILogger
     {
         private readonly Formatter _formatter = new Formatter();
-        
+
+        public void Trace(string tag, string message)
+        {
+            UnityEngine.Debug.Log(_formatter.Format(MessageType.Trace, tag, message));
+        }
+
+        public void Trace(object obj, string message)
+        {
+            UnityEngine.Debug.Log(_formatter.Format(MessageType.Trace, obj, message));
+        }
+
         public void Debug(string tag, string message)
         {
             UnityEngine.Debug.Log(_formatter.Format(tag, message));
@@ -16,6 +24,16 @@ namespace ShandyGecko.LogSystem
         public void Debug(object obj, string message)
         {
             UnityEngine.Debug.Log(_formatter.Format(obj, message));
+        }
+
+        public void Info(string tag, string message)
+        {
+            UnityEngine.Debug.Log(_formatter.Format(MessageType.Info, tag, message));
+        }
+
+        public void Info(object obj, string message)
+        {
+            UnityEngine.Debug.Log(_formatter.Format(MessageType.Info, obj, message));
         }
 
         public void Warning(string tag, string message)
@@ -38,28 +56,15 @@ namespace ShandyGecko.LogSystem
             UnityEngine.Debug.LogError(_formatter.Format(obj, message));
         }
 
-        public void Exception(string tag, Exception exception)
+        public void Critical(string tag, string message)
         {
-            UnityEngine.Debug.LogError(_formatter.Format(tag, exception));
-            UnityEngine.Debug.LogException(exception);
+            UnityEngine.Debug.LogError(_formatter.Format(MessageType.Critical, tag, message));
         }
 
-        public void Exception(object obj, Exception exception)
+        public void Critical(object obj, string message)
         {
-            UnityEngine.Debug.LogError(_formatter.Format(obj, exception));
-            UnityEngine.Debug.LogException(exception);
-        }
-
-        public void Assertion(string tag, object assertion)
-        {
-            UnityEngine.Debug.LogError(_formatter.Format(tag, assertion));
-            UnityEngine.Debug.LogAssertion(assertion);
-        }
-
-        public void Assertion(object obj, object assertion)
-        {
-            UnityEngine.Debug.LogError(_formatter.Format(obj, assertion));
-            UnityEngine.Debug.LogAssertion(assertion);
+            UnityEngine.Debug.LogError(_formatter.Format(MessageType.Critical, obj, message));
         }
     }
 }
+#endif

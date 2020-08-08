@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using ShandyGecko.LogSystem.Filters;
 
@@ -47,9 +46,35 @@ namespace ShandyGecko.LogSystem
 			_loggers.AddRange(loggers);
 		}
 
+		public void Trace(string tag, string message)
+		{
+			if (!IsFilterPassed(MessageType.Trace, tag))
+			{
+				return;
+			}
+
+			foreach (var logger in _loggers)
+			{
+				logger.Trace(tag, message);
+			}
+		}
+
+		public void Trace(object obj, string message)
+		{
+			if (!IsFilterPassed(MessageType.Trace, obj))
+			{
+				return;
+			}
+
+			foreach (var logger in _loggers)
+			{
+				logger.Trace(obj, message);
+			}
+		}
+
 		public void Debug(string tag, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Log, tag, message))
+			if (!IsFilterPassed(MessageType.Debug, tag))
 			{
 				return;
 			}
@@ -62,7 +87,7 @@ namespace ShandyGecko.LogSystem
 		
 		public void Debug(object obj, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Log, obj, message))
+			if (!IsFilterPassed(MessageType.Debug, obj))
 			{
 				return;
 			}
@@ -72,14 +97,40 @@ namespace ShandyGecko.LogSystem
 				logger.Debug(obj, message);
 			}
 		}
-		
-		public void Warning(string tag, string message)
+
+		public void Info(string tag, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Warning, tag, message))
+			if (!IsFilterPassed(MessageType.Info, tag))
 			{
 				return;
 			}
+			
+			foreach (var logger in _loggers)
+			{
+				logger.Info(tag, message);
+			}
+		}
 
+		public void Info(object obj, string message)
+		{
+			if (!IsFilterPassed(MessageType.Info, obj))
+			{
+				return;
+			}
+			
+			foreach (var logger in _loggers)
+			{
+				logger.Info(obj, message);
+			}
+		}
+
+		public void Warning(string tag, string message)
+		{
+			if (!IsFilterPassed(MessageType.Warning, tag))
+			{
+				return;
+			}
+			
 			foreach (var logger in _loggers)
 			{
 				logger.Warning(tag, message);
@@ -88,7 +139,7 @@ namespace ShandyGecko.LogSystem
 		
 		public void Warning(object obj, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Warning, obj, message))
+			if (!IsFilterPassed(MessageType.Warning, obj))
 			{
 				return;
 			}
@@ -101,7 +152,7 @@ namespace ShandyGecko.LogSystem
 		
 		public void Error(string tag, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Error, tag, message))
+			if (!IsFilterPassed(MessageType.Error, tag))
 			{
 				return;
 			}
@@ -114,7 +165,7 @@ namespace ShandyGecko.LogSystem
 		
 		public void Error(object obj, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Error, obj, message))
+			if (!IsFilterPassed(MessageType.Error, obj))
 			{
 				return;
 			}
@@ -124,57 +175,51 @@ namespace ShandyGecko.LogSystem
 				logger.Error(obj, message);
 			}
 		}
-		
-		public void Exception(string tag, Exception exception)
+
+		public void Critical(string tag, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Exception, tag, exception.ToString()))
+			if (!IsFilterPassed(MessageType.Critical, tag))
 			{
 				return;
 			}
-
+			
 			foreach (var logger in _loggers)
 			{
-				logger.Exception(tag, exception);
+				logger.Critical(tag, message);
 			}
 		}
-		
-		public void Exception(object obj, Exception exception)
+
+		public void Critical(object obj, string message)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Exception, obj, exception.ToString()))
+			if (!IsFilterPassed(MessageType.Critical, obj))
 			{
 				return;
 			}
-
+			
 			foreach (var logger in _loggers)
 			{
-				logger.Exception(obj, exception);
+				logger.Critical(obj, message);
 			}
 		}
-		
-		public void Assertion(string tag, object assertion)
+
+		private bool IsFilterPassed(MessageType msgType, object obj)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Assertion, tag, assertion.ToString()))
+			if (Filter == null)
 			{
-				return;
+				return true;
 			}
 
-			foreach (var logger in _loggers)
-			{
-				logger.Assertion(tag, assertion);
-			}
+			return Filter.IsPassed(msgType, obj);
 		}
 		
-		public void Assertion(object obj, object assertion)
+		private bool IsFilterPassed(MessageType msgType, string tag)
 		{
-			if (Filter != null && !Filter.IsPassed(MessageType.Assertion, obj, assertion.ToString()))
+			if (Filter == null)
 			{
-				return;
+				return true;
 			}
 
-			foreach (var logger in _loggers)
-			{
-				logger.Assertion(obj, assertion);
-			}
+			return Filter.IsPassed(msgType, tag);
 		}
 	}
 }
