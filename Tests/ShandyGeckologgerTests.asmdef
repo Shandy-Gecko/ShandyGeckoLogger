@@ -1,11 +1,13 @@
 {
-    "name": "ShandyGeckologgerTests",
+    "name": "ShandyGeckoLogger.Tests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "ShandyGeckoLogger"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
