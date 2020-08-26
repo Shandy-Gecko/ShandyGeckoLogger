@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿#define TRACE_LOGS
+
+using System;
+using System.Linq;
 using NUnit.Framework;
 using ShandyGecko.LogSystem.Tests.FakeLoggers;
 
@@ -11,12 +14,14 @@ namespace ShandyGecko.LogSystem.Tests
         
         private Formatter _formatter;
         private FakeLogger _fakeLogger;
+        private object _testObject;
         
         [SetUp]
         public void OnSetup()
         {
             _formatter = new Formatter();
             _fakeLogger = new FakeLogger();
+            _testObject = new object();
 
             Log.CompoundLogger.ClearLoggers();
             Log.CompoundLogger.SetLoggers(_fakeLogger);
@@ -27,16 +32,31 @@ namespace ShandyGecko.LogSystem.Tests
         {
             Log.Trace(TestTag, TestMsg);
             
-            var expectedMessage = GetExpectedMessage(MessageType.Trace, TestTag, TestMsg);
-            var actualMessage = _fakeLogger.LoggedEvents.Last();
-            
-            Assert.AreEqual(expectedMessage, actualMessage);
+            AssetLoggedEventWithTag(MessageType.Trace);
         }
         
         [Test]
         public void TraceObjTest()
         {
+            Log.Trace(_testObject, TestMsg);
             
+            AssetLoggedEventWithObj(MessageType.Trace);
+        }
+
+        private void AssetLoggedEventWithTag(MessageType messageType)
+        {
+            var expectedMessage = GetExpectedMessage(messageType, TestTag, TestMsg);
+            var actualMessage = _fakeLogger.LoggedEvents.Last();
+            
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        
+        private void AssetLoggedEventWithObj(MessageType messageType)
+        {
+            var expectedMessage = GetExpectedMessage(messageType, _testObject, TestMsg);
+            var actualMessage = _fakeLogger.LoggedEvents.Last();
+            
+            Assert.AreEqual(expectedMessage, actualMessage);
         }
 
         private string GetExpectedMessage(MessageType messageType, string tag, string message)
