@@ -5,16 +5,26 @@ namespace ShandyGecko.LogSystem
 {
 	public class CompoundLogger : ICompoundLogger
 	{
-		public IFilter Filter { get; set; }
-
+		private int _loggersCount;
+		
 		private readonly List<ILogger> _loggers = new List<ILogger>();
 
+		private bool IsLoggersListEmpty => _loggersCount == 0;
+		
 		public IEnumerable<ILogger> Loggers => _loggers;
+		
+		public IFilter Filter { get; set; }
 
-		public void SetLoggers(params ILogger[] loggers)
+		public void ClearLoggers()
 		{
 			_loggers.Clear();
+			_loggersCount = 0;
+		}
+		
+		public void SetLoggers(params ILogger[] loggers)
+		{
 			_loggers.AddRange(loggers);
+			_loggersCount = loggers.Length;
 		}
 
 		public void TryAddLogger(ILogger logger)
@@ -43,7 +53,7 @@ namespace ShandyGecko.LogSystem
 
 		public CompoundLogger(params ILogger[] loggers)
 		{
-			_loggers.AddRange(loggers);
+			SetLoggers(loggers);
 		}
 
 		public void Trace(string tag, string message)
@@ -220,6 +230,16 @@ namespace ShandyGecko.LogSystem
 			}
 
 			return Filter.IsPassed(msgType, tag);
+		}
+
+		private void CheckLoggersCount()
+		{
+			if (!IsLoggersListEmpty)
+			{
+				return;
+			}
+			
+			throw new NoLoggersException();
 		}
 	}
 }

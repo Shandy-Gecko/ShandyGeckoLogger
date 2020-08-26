@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,16 +25,6 @@ namespace ShandyGecko.LogSystem
 		public string Format(MessageType type, string tag, string message)
 		{
 			return $"[{type}]-[{tag}]: {message}\n{GetFormatterValues()}";
-		}
-		
-		public string Format(object obj, string message)
-		{
-			return $"[{obj.ToLogString()}: {message}\n{GetFormatterValues()}";
-		}
-		
-		public string Format(string tag, string message)
-		{
-			return $"[{tag}]: {message}\n{GetFormatterValues()}";
 		}
 
 		private string GetFormatterValues()

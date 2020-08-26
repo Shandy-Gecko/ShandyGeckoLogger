@@ -9,6 +9,7 @@ namespace ShandyGecko.LogSystem
 
 		IEnumerable<ILogger> Loggers { get; }
 
+		void ClearLoggers();
 		void SetLoggers(params ILogger[] loggers);
 
 		void TryAddLogger(ILogger logger);
