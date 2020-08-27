@@ -1,6 +1,10 @@
 ﻿#define TRACE_LOGS
+#define DEBUG_LOGS
+#define INFO_LOGS
+#define WARNING_LOGS
+#define ERROR_LOGS
+#define CRITICAL_LOGS
 
-using System;
 using System.Linq;
 using NUnit.Framework;
 using ShandyGecko.LogSystem.Tests.FakeLoggers;
@@ -41,6 +45,86 @@ namespace ShandyGecko.LogSystem.Tests
             Log.Trace(_testObject, TestMsg);
             
             AssetLoggedEventWithObj(MessageType.Trace);
+        }
+        
+        [Test]
+        public void DebugTagTest()
+        {
+            Log.Debug(TestTag, TestMsg);
+            
+            AssetLoggedEventWithTag(MessageType.Debug);
+        }
+        
+        [Test]
+        public void DebugObjTest()
+        {
+            Log.Debug(_testObject, TestMsg);
+            
+            AssetLoggedEventWithObj(MessageType.Debug);
+        }
+        
+        [Test]
+        public void InfoTagTest()
+        {
+            Log.Info(TestTag, TestMsg);
+            
+            AssetLoggedEventWithTag(MessageType.Info);
+        }
+        
+        [Test]
+        public void InfoObjTest()
+        {
+            Log.Info(_testObject, TestMsg);
+            
+            AssetLoggedEventWithObj(MessageType.Info);
+        }
+        
+        [Test]
+        public void WarningTagTest()
+        {
+            Log.Warning(TestTag, TestMsg);
+            
+            AssetLoggedEventWithTag(MessageType.Warning);
+        }
+        
+        [Test]
+        public void WarningObjTest()
+        {
+            Log.Warning(_testObject, TestMsg);
+            
+            AssetLoggedEventWithObj(MessageType.Warning);
+        }
+        
+        [Test]
+        public void ErrorTagTest()
+        {
+            Log.Error(TestTag, TestMsg);
+            
+            AssetLoggedEventWithTag(MessageType.Error);
+        }
+        
+        [Test]
+        public void ErrorObjTest()
+        {
+            Log.Error(_testObject, TestMsg);
+            
+            AssetLoggedEventWithObj(MessageType.Error);
+        }
+        
+        [Test]
+        public void CriticalTagTest()
+        {
+            Log.Critical(TestTag, TestMsg);
+            
+            AssetLoggedEventWithTag(MessageType.Critical);
+        }
+        
+        [Test]
+        public void CriticalObjTest()
+        {
+            Log.Critical(_testObject, TestMsg);
+            
+            AssetLoggedEventWithObj(MessageType.Critical);
         }
 
         private void AssetLoggedEventWithTag(MessageType messageType)
