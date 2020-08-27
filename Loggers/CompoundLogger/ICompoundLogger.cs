@@ -13,7 +13,6 @@ namespace ShandyGecko.LogSystem
 		void SetLoggers(params ILogger[] loggers);
 
 		void TryAddLogger(ILogger logger);
-
 		void TryRemoveLogger(ILogger logger);
 	}
 }

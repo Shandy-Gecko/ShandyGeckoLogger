@@ -39,7 +39,7 @@ namespace ShandyGecko.LogSystem
 		
 		public void TryRemoveLogger(ILogger logger)
 		{
-			if (_loggers.Contains(logger))
+			if (!_loggers.Contains(logger))
 			{
 				return;
 			}
@@ -58,6 +58,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Trace(string tag, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Trace, tag))
 			{
 				return;
@@ -71,6 +73,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Trace(object obj, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Trace, obj))
 			{
 				return;
@@ -84,6 +88,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Debug(string tag, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Debug, tag))
 			{
 				return;
@@ -97,6 +103,8 @@ namespace ShandyGecko.LogSystem
 		
 		public void Debug(object obj, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Debug, obj))
 			{
 				return;
@@ -110,6 +118,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Info(string tag, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Info, tag))
 			{
 				return;
@@ -123,6 +133,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Info(object obj, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Info, obj))
 			{
 				return;
@@ -136,6 +148,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Warning(string tag, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Warning, tag))
 			{
 				return;
@@ -149,6 +163,8 @@ namespace ShandyGecko.LogSystem
 		
 		public void Warning(object obj, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Warning, obj))
 			{
 				return;
@@ -162,6 +178,8 @@ namespace ShandyGecko.LogSystem
 		
 		public void Error(string tag, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Error, tag))
 			{
 				return;
@@ -175,6 +193,8 @@ namespace ShandyGecko.LogSystem
 		
 		public void Error(object obj, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Error, obj))
 			{
 				return;
@@ -188,6 +208,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Critical(string tag, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Critical, tag))
 			{
 				return;
@@ -201,6 +223,8 @@ namespace ShandyGecko.LogSystem
 
 		public void Critical(object obj, string message)
 		{
+			CheckLoggersCount();
+			
 			if (!IsFilterPassed(MessageType.Critical, obj))
 			{
 				return;

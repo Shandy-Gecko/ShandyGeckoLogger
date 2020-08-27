@@ -16,10 +16,6 @@ namespace ShandyGecko.LogSystem
         static Log()
         {
             CompoundLogger = new CompoundLogger();
-            
-#if UNITY_5_3_OR_NEWER
-            CompoundLogger.SetLoggers(new UnityLogger());
-#endif
         }
 
         [Conditional(TraceLogs)]

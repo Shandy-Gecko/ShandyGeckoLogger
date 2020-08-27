@@ -30,6 +30,16 @@ namespace ShandyGecko.LogSystem.Tests
             Log.CompoundLogger.ClearLoggers();
             Log.CompoundLogger.SetLoggers(_fakeLogger);
         }
+
+        [TearDown]
+        public void OnTearDown()
+        {
+            _formatter = null;
+            _fakeLogger = null;
+            _testObject = null;
+            
+            Log.CompoundLogger.ClearLoggers();
+        }
         
         [Test]
         public void TraceTagTest()
