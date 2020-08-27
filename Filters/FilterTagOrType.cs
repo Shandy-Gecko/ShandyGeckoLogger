@@ -8,6 +8,8 @@ namespace ShandyGecko.LogSystem.Filters
 		private readonly HashSet<string> _tags = new HashSet<string>();
 		private readonly HashSet<Type> _types = new HashSet<Type>();
 
+		public IEnumerable<string> Tags => _tags;
+
 		public void AddTag(string tag)
 		{
 			if (_tags.Contains(tag))

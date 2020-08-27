@@ -238,6 +238,7 @@ namespace ShandyGecko.LogSystem
 
 		private bool IsFilterPassed(MessageType msgType, object obj)
 		{
+			//TODO при переделке на множество фильтров сделать OR или AND по флагу
 			if (Filter == null)
 			{
 				return true;
@@ -248,6 +249,7 @@ namespace ShandyGecko.LogSystem
 		
 		private bool IsFilterPassed(MessageType msgType, string tag)
 		{
+			//TODO при переделке на множество фильтров сделать OR или AND по флагу
 			if (Filter == null)
 			{
 				return true;
