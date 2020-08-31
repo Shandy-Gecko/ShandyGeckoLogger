@@ -16,14 +16,14 @@ namespace ShandyGecko.LogSystem.Tests
         private const string TestTag = "TestTag";
         private const string TestMsg = "TestMessage";
         
-        private Formatter _formatter;
+        private DefaultFormatter _formatter;
         private FakeLogger _fakeLogger;
         private object _testObject;
         
         [SetUp]
         public void OnSetup()
         {
-            _formatter = new Formatter();
+            _formatter = new DefaultFormatter();
             _fakeLogger = new FakeLogger();
             _testObject = new object();
 

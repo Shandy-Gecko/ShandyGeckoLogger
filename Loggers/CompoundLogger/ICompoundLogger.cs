@@ -5,7 +5,6 @@ namespace ShandyGecko.LogSystem
 {
 	public interface ICompoundLogger : ILogger
 	{
-		//TODO переделать на множество фильтров
 		IFilter Filter { get; set; }
 
 		IEnumerable<ILogger> Loggers { get; }

@@ -2,8 +2,14 @@ namespace ShandyGecko.LogSystem
 {
     public abstract class BaseLogger : ILogger
     {
-        private readonly Formatter _formatter = new Formatter();
-        
+
+        private IFormatter _formatter;
+        public IFormatter Formatter
+        {
+            get => _formatter ?? (_formatter = new DefaultFormatter());
+            set => _formatter = value;
+        }
+
         public abstract void Trace(string tag, string message);
         public abstract void Trace(object obj, string message);
 
@@ -24,12 +30,12 @@ namespace ShandyGecko.LogSystem
 
         protected string GetFormattedMessage(MessageType msgType, string tag, string message)
         {
-            return _formatter.Format(msgType, tag, message);
+            return Formatter.Format(msgType, tag, message);
         }
         
         protected string GetFormattedMessage(MessageType msgType, object obj, string message)
         {
-            return _formatter.Format(msgType, obj, message);
+            return Formatter.Format(msgType, obj, message);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ShandyGecko.LogSystem
 			foreach (var frame in frames)
 			{
 				var declaringType = frame.GetMethod().DeclaringType;
-				if (declaringType == typeof(Log) || declaringType == typeof(Formatter))
+				if (declaringType == typeof(Log) || declaringType == typeof(DefaultFormatter))
 				{
 					continue;
 				}

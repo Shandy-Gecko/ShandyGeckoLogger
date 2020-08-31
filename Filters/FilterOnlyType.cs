@@ -6,6 +6,8 @@ namespace ShandyGecko.LogSystem.Filters
 	public class FilterOnlyType : IFilter, ITypeFilter
 	{
 		private readonly HashSet<Type> _types = new HashSet<Type>();
+
+		public IEnumerable<Type> Types => _types;
 		
 		public bool IsPassed(MessageType messageType, string tag)
 		{
@@ -19,6 +21,11 @@ namespace ShandyGecko.LogSystem.Filters
 
 		public void AddType(Type type)
 		{
+			if (type == null)
+			{
+				return;
+			}
+			
 			if (_types.Contains(type))
 			{
 				return;
@@ -29,6 +36,11 @@ namespace ShandyGecko.LogSystem.Filters
 
 		public void RemoveType(Type type)
 		{
+			if (type == null)
+			{
+				return;
+			}
+			
 			if (!_types.Contains(type))
 			{
 				return;
