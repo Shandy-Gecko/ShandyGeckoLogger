@@ -6,14 +6,19 @@ namespace ShandyGecko.LogSystem
 	public class CompoundLogger : ICompoundLogger
 	{
 		private int _loggersCount;
+		private IFilter _filter;
 		
 		private readonly List<ILogger> _loggers = new List<ILogger>();
 
 		private bool IsLoggersListEmpty => _loggersCount == 0;
 		
 		public IEnumerable<ILogger> Loggers => _loggers;
-		
-		public IFilter Filter { get; set; }
+
+		public IFilter Filter
+		{
+			get => _filter ?? (_filter = new FilterAlwaysPass());
+			set => _filter = value;
+		}
 
 		public void ClearLoggers()
 		{
@@ -239,10 +244,6 @@ namespace ShandyGecko.LogSystem
 		private bool IsFilterPassed(MessageType msgType, object obj)
 		{
 			//TODO при переделке на множество фильтров сделать OR или AND по флагу
-			if (Filter == null)
-			{
-				return true;
-			}
 
 			return Filter.IsPassed(msgType, obj);
 		}
@@ -250,11 +251,6 @@ namespace ShandyGecko.LogSystem
 		private bool IsFilterPassed(MessageType msgType, string tag)
 		{
 			//TODO при переделке на множество фильтров сделать OR или AND по флагу
-			if (Filter == null)
-			{
-				return true;
-			}
-
 			return Filter.IsPassed(msgType, tag);
 		}
 

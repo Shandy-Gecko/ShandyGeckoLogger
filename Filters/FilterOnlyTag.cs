@@ -10,6 +10,11 @@ namespace ShandyGecko.LogSystem.Filters
 
 		public void AddTag(string tag)
 		{
+			if (string.IsNullOrEmpty(tag))
+			{
+				return;
+			}
+			
 			if (_tags.Contains(tag))
 			{
 				return;
@@ -20,7 +25,12 @@ namespace ShandyGecko.LogSystem.Filters
 
 		public void RemoveTag(string tag)
 		{
-			if (_tags.Contains(tag))
+			if (string.IsNullOrEmpty(tag))
+			{
+				return;
+			}
+			
+			if (!_tags.Contains(tag))
 			{
 				return;
 			}

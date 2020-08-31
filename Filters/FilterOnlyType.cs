@@ -29,7 +29,7 @@ namespace ShandyGecko.LogSystem.Filters
 
 		public void RemoveType(Type type)
 		{
-			if (_types.Contains(type))
+			if (!_types.Contains(type))
 			{
 				return;
 			}

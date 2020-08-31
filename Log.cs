@@ -11,7 +11,7 @@ namespace ShandyGecko.LogSystem
         private const string ErrorLogs = "ERROR_LOGS";
         private const string CriticalLogs = "CRITICAL_LOGS";
 
-        public static ICompoundLogger CompoundLogger { get; private set; }
+        public static ICompoundLogger CompoundLogger { get; }
 
         static Log()
         {
