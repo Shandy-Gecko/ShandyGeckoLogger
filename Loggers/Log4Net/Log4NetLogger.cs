@@ -71,12 +71,12 @@ namespace ShandyGecko.LogSystem
 
 		public override void Critical(string tag, string message)
 		{
-			_log4Net.Fatal(GetFormattedMessage(MessageType.Error, tag, message));
+			_log4Net.Critical(GetFormattedMessage(MessageType.Critical, tag, message));
 		}
 
 		public override void Critical(object obj, string message)
 		{
-			_log4Net.Fatal(GetFormattedMessage(MessageType.Error, obj, message));
+			_log4Net.Critical(GetFormattedMessage(MessageType.Critical, obj, message));
 		}
 
 		private void CheckLogger()

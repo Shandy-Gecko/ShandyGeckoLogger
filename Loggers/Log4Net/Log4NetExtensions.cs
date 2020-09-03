@@ -16,6 +16,17 @@ namespace ShandyGecko.LogSystem
 		{
 			log.Trace(message, null);
 		}
+		
+		public static void Critical(this ILog log, string message, Exception exception)
+		{
+			log.Logger.Log(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType, 
+				log4net.Core.Level.Critical, message, exception);
+		}
+
+		public static void Critical(this ILog log, string message)
+		{
+			log.Critical(message, null);
+		}
 	}
 }
 #endif
