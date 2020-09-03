@@ -1,4 +1,5 @@
 #if LOG4NET
+using System;
 using System.IO;
 using System.Reflection;
 using log4net;
@@ -13,7 +14,17 @@ namespace ShandyGecko.LogSystem
 		public void Configurate()
 		{
 			var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-			XmlConfigurator.Configure(logRepository, new FileInfo(ConfigName));
+			var configFile = new FileInfo(ConfigName);
+
+			if (!configFile.Exists)
+			{
+				Console.WriteLine(
+					$"There is no log4net config file with name {ConfigName} at path {Directory.GetCurrentDirectory()}");
+				return;
+			}
+			
+			XmlConfigurator.Configure(logRepository, configFile);
+			Console.WriteLine($"Load log4net config file {ConfigName} at path {configFile.FullName}");
 		}
 	}
 }
