@@ -1,8 +1,7 @@
 namespace ShandyGecko.LogSystem
 {
-    public abstract class BaseLogger : ILogger
+    public abstract class BaseLogger : ILogger, IFormattedLogger
     {
-
         private IFormatter _formatter;
         public IFormatter Formatter
         {

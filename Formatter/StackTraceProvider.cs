@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace ShandyGecko.LogSystem
@@ -19,10 +20,18 @@ namespace ShandyGecko.LogSystem
 			var builder = new StringBuilder();
 			foreach (var frame in frames)
 			{
+				if (frame == null)
+				{
+					continue;
+				}
+				
 				var declaringType = frame.GetMethod().DeclaringType;
 				if (declaringType == null ||
 				    declaringType == typeof(Log) ||
-				    declaringType.BaseType == typeof(IFormatter))
+				    //TODO переделать на не LINQ
+				    declaringType.GetInterfaces().Contains(typeof(ILogger)) ||
+				    declaringType.GetInterfaces().Contains(typeof(IFormatterValueProvider)) ||
+				    declaringType.GetInterfaces().Contains(typeof(IFormatter)))
 				{
 					continue;
 				}
