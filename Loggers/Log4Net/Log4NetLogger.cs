@@ -1,8 +1,8 @@
+#if LOG4NET
 using System;
 using System.Reflection;
 using log4net;
 
-#if LOG4NET
 namespace ShandyGecko.LogSystem
 {
 	public class Log4NetLogger : BaseLogger
