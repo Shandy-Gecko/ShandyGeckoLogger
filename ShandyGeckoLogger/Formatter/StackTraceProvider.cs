@@ -10,7 +10,7 @@ namespace ShandyGecko.LogSystem
 		
 		public string GetValue()
 		{
-			var stack = new StackTrace();
+			var stack = new StackTrace(true);
 			var frames = stack.GetFrames();
 			if (frames == null)
 			{
