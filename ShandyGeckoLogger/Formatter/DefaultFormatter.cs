@@ -10,12 +10,14 @@ namespace ShandyGecko.LogSystem
 
 		public string Format(MessageType type, object obj, string message)
 		{
-			return $"[{type}]-{obj.ToLogString()}: {message}\n{GetFormatterValues()}";
+			var typeStr = ConvertMessageTypeToStr(type);
+			return $"[{typeStr}]-{obj.ToLogString()}: {message}\n{GetFormatterValues()}";
 		}
 		
 		public string Format(MessageType type, string tag, string message)
 		{
-			return $"[{type}]-[{tag}]: {message}\n{GetFormatterValues()}";
+			var typeStr = ConvertMessageTypeToStr(type);
+			return $"[{typeStr}]-[{tag}]: {message}\n{GetFormatterValues()}";
 		}
 
 		public void AddValueProvider(IFormatterValueProvider valueProvider)
@@ -60,6 +62,11 @@ namespace ShandyGecko.LogSystem
 		private bool CanModifyValueProvidersCollection(IFormatterValueProvider valueProvider)
 		{
 			return valueProvider != null && !_valueProviders.Contains(valueProvider);
+		}
+
+		private string ConvertMessageTypeToStr(MessageType messageType)
+		{
+			return messageType.ToString().ToUpper();
 		}
 	}
 }
