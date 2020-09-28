@@ -3,7 +3,7 @@ using ShandyGecko.LogSystem.Filters;
 
 namespace ShandyGecko.LogSystem.Tests
 {
-    public class FilterAlwaysPassTest
+    public class FilterAlwaysPassTests
     {
         private FilterAlwaysPass _filterAlwaysPass;
         

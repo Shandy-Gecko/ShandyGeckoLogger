@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ShandyGecko.LogSystem.Filters
 {
-	public interface ITypeFilter
+	public interface ITypeFilter : IFilter
 	{
 		IEnumerable<Type> Types { get; }
 		

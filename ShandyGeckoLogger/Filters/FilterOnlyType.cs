@@ -3,11 +3,23 @@ using System.Collections.Generic;
 
 namespace ShandyGecko.LogSystem.Filters
 {
-	public class FilterOnlyType : IFilter, ITypeFilter
+	public class FilterOnlyType : ITypeFilter
 	{
 		private readonly HashSet<Type> _types = new HashSet<Type>();
 
 		public IEnumerable<Type> Types => _types;
+
+		public FilterOnlyType()
+		{
+		}
+
+		public FilterOnlyType(params Type[] types)
+		{
+			foreach (var type in types)
+			{
+				_types.Add(type);
+			}
+		}
 		
 		public bool IsPassed(MessageType messageType, string tag)
 		{
