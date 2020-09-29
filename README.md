@@ -1,5 +1,5 @@
 # ShandyGeckoLogger
 
-![.NET Core](https://github.com/Shandy-Gecko/ShandyGeckoLogger/workflows/.NET%20Core/badge.svg?branch=master)
+![Build and Test](https://github.com/Shandy-Gecko/ShandyGeckoLogger/workflows/Build%20and%20Test/badge.svg)
 
 Another logger for Unity and C# projects
