@@ -2,6 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>ShandyGecko Logger</Title>
+        <Authors>Ilya Gutnikov</Authors>
+        <Description>Simple logger for Unity and .NET projects</Description>
+        <PackageProjectUrl>https://github.com/Shandy-Gecko/ShandyGeckoLogger</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Shandy-Gecko/ShandyGeckoLogger</RepositoryUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
