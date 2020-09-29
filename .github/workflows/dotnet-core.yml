@@ -21,3 +21,7 @@ jobs:
       run: dotnet build ShandyGeckoLogger/ShandyGeckoLogger.csproj --configuration Release
     - name: Test
       run: dotnet test ShandyGeckoLogger.UnitTests/ShandyGeckoLogger.UnitTests.csproj --verbosity normal
+    - name: Install gpr
+      run: dotnet tool install gpr --global
+    - name: gpr upload
+      run: find -name "*.nupkg" -print -exec gpr push -k ${{secrets.GH_PACKAGE}} {} \;
